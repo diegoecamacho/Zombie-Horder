@@ -14,6 +14,11 @@ namespace Weapons
             if (WeaponStats.BulletsInClip > 0 && !Reloading && !WeaponHolder.Controller.IsRunning)
             {
                 base.FireWeapon();
+
+                if (!FiringEffect)
+                {
+                    FiringEffect = Instantiate(FiringAnimation, ParticleSpawnLocation).GetComponent<ParticleSystem>();
+                }
                 
                 Ray screenRay = MainCamera.ScreenPointToRay(new Vector3(CrosshairComponent.CurrentAimPosition.x,
                     CrosshairComponent.CurrentAimPosition.y, 0));
@@ -32,8 +37,6 @@ namespace Weapons
 
                 WeaponHolder.StartReloading();
             }
-
-          
         }
 
         private void OnDrawGizmos()
