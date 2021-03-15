@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1721228911440997524
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6329571781353064181}
+  m_Layer: 0
+  m_Name: ParticleSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6329571781353064181
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1721228911440997524}
+  m_LocalRotation: {x: -0.41971502, y: 0.36507675, z: -0.54450583, w: 0.62775135}
+  m_LocalPosition: {x: 0.7443, y: 0.1418, z: 0.1611}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 251943878890399477}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: -367.434, y: 67.397, z: 273.163}
 --- !u!1 &2523273983844142317
 GameObject:
   m_ObjectHideFlags: 0
@@ -30,6 +60,7 @@ Transform:
   m_Children:
   - {fileID: 1762564141393932844}
   - {fileID: 2530205372850068812}
+  - {fileID: 6329571781353064181}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -46,6 +77,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GripIKLocation: {fileID: 2530205372850068812}
+  ParticleSpawnLocation: {fileID: 6329571781353064181}
+  FiringAnimation: {fileID: 1320275964731592, guid: 0624c6f5a57851d48ba74b4f86ec13d7, type: 3}
   WeaponStats:
     WeaponType: 2
     WeaponName: AK-47

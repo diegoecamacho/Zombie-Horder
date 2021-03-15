@@ -10,7 +10,8 @@ public class GameManager : MonoBehaviour
 
     public bool CursorActive { get; private set; } = true;
 
-
+    public string SelectedSaveName { set; get; }
+    
     private void Awake()
     {
         if (Instance!= null && Instance != this)
