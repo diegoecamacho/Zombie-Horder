@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7f2c934c4df8c44aa895d743aa8bd06, type: 3}
+  m_Name: Weapon
+  m_EditorClassIdentifier: 
+  itemName: AK47
+  itemCategory: 1
+  itemPrefab: {fileID: 4983601096313483162, guid: d3515172c5a13e94fbbc9bd6a2583986, type: 3}
+  stackable: 0
+  maxStack: 0
+  weaponStats:
+    weaponType: 2
+    weaponName: AK47
+    damage: 20
+    bulletsInClip: 20
+    clipSize: 20
+    bulletsAvailable: 80
+    fireStartDelay: 0
+    fireRate: 0.1
+    fireDistance: 1000
+    repeating: 1
+    weaponHitLayer:
+      serializedVersion: 2
+      m_Bits: 55

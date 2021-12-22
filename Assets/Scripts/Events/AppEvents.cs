@@ -1,10 +1,9 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AppEvents
 {
-
     public delegate void MouseCursorEnable(bool enabled);
 
     public static event MouseCursorEnable MouseCursorEnabled;
@@ -13,5 +12,4 @@ public class AppEvents
     {
         MouseCursorEnabled?.Invoke(enabled);
     }
-    
 }

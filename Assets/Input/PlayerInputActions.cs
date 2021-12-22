@@ -16,12 +16,12 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     ""maps"": [
         {
             ""name"": ""PlayerActionMap"",
-            ""id"": ""89c2c321-1711-404f-8ea1-03e463a9020f"",
+            ""id"": ""e957ddc2-7049-40eb-9cd6-c3b22fe477aa"",
             ""actions"": [
                 {
                     ""name"": ""Movement"",
                     ""type"": ""Value"",
-                    ""id"": ""b63fe715-2cd9-4d81-a4c4-28c8d4cc482b"",
+                    ""id"": ""0b05fb87-cd75-49c3-a297-717c36773fcd"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -29,7 +29,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
-                    ""id"": ""8dcf6008-7bd6-4acc-9241-8e3a87fa142b"",
+                    ""id"": ""8c3c6a4a-6821-4dd0-8f42-785a571518f3"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -37,7 +37,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": ""Run"",
                     ""type"": ""Button"",
-                    ""id"": ""1e4e4968-764c-4825-9d0e-ceaab65d65e4"",
+                    ""id"": ""7a7cfe0c-2909-456f-b9ed-2c407b7b54df"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)""
@@ -45,7 +45,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": ""Look"",
                     ""type"": ""Value"",
-                    ""id"": ""7bd03e76-9f91-40ed-a2ba-818fb5816843"",
+                    ""id"": ""e1db03d2-eed5-47ce-ad82-e03e95e8fc82"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": ""NormalizeVector2"",
                     ""interactions"": """"
@@ -53,24 +53,56 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": ""Fire"",
                     ""type"": ""Button"",
-                    ""id"": ""fb327b54-8da4-4375-be45-310af34df352"",
+                    ""id"": ""180083d3-e780-4be4-a712-b31c7ef584d2"",
                     ""expectedControlType"": ""Button"",
-                    ""processors"": ""NormalizeVector2"",
-                    ""interactions"": """"
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)""
                 },
                 {
                     ""name"": ""Reload"",
                     ""type"": ""Button"",
-                    ""id"": ""58493f79-4511-4086-b815-48838eddfa62"",
+                    ""id"": ""890e7436-d551-4a87-8527-ac7b112106db"",
                     ""expectedControlType"": ""Button"",
-                    ""processors"": ""NormalizeVector2"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""PauseGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""cab38bfa-d193-4251-a504-0a404343cf93"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""8e1e07b1-9958-4648-9ceb-6e3c4acbe6c2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SaveGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""42c36bfe-4ca8-4b0d-9440-956b72ac7116"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""LoadGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""4eb2ed4b-1331-43a0-811e-f613aab1a4d9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
                     ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": ""Direction"",
-                    ""id"": ""45c8b727-3167-4413-ac39-e21c378479b2"",
+                    ""id"": ""c784f696-94b8-4982-823c-8a704ea235a3"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -81,51 +113,51 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""up"",
-                    ""id"": ""1b0a09fd-6528-47c2-a504-3032b054f671"",
+                    ""id"": ""1dc696ce-5a3b-424c-aaa3-1f07004f76c8"",
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard / Mouse"",
+                    ""groups"": """",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""down"",
-                    ""id"": ""d55820ee-9a4b-4b74-9efb-57478705c087"",
+                    ""id"": ""52aca587-2229-4af5-bc52-7c5c35638a2d"",
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard / Mouse"",
+                    ""groups"": """",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""left"",
-                    ""id"": ""20d7045d-944a-4c63-be61-470f31d996da"",
+                    ""id"": ""406241f6-54d4-462d-b7f9-bca67c350329"",
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard / Mouse"",
+                    ""groups"": """",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""right"",
-                    ""id"": ""73401e7a-bb06-4fec-bf27-85697a5953a7"",
+                    ""id"": ""2def3a66-a2c4-4e4f-93f8-d93ba1049387"",
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard / Mouse"",
+                    ""groups"": """",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": """",
-                    ""id"": ""ff9b64a3-ec64-4f45-92e3-d4491fe0ede1"",
+                    ""id"": ""d45b5f1d-4239-45ae-9490-b4edf6f0691a"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
@@ -136,7 +168,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""d45b2adb-580f-46af-be17-55fc52bb5c0f"",
+                    ""id"": ""3895b89a-d00f-4cb7-b725-10e3b8263911"",
                     ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -147,7 +179,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""a1eac029-6660-4c3d-8a09-a4ab6c1db2b3"",
+                    ""id"": ""0735793e-3462-4720-b952-6d098dff97e2"",
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -158,18 +190,18 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""ae2feb52-d814-4b3f-ac35-6945fb3870d3"",
+                    ""id"": ""551ea24c-5850-4d39-9c17-d748c8d380b8"",
                     ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": ""Press(behavior=2)"",
+                    ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard / Mouse"",
+                    ""groups"": """",
                     ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""e94528e7-1078-438c-b2bc-67d3e319b199"",
+                    ""id"": ""6e23a571-c6ee-4365-b8bd-18b63df10cc4"",
                     ""path"": ""<Keyboard>/r"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -177,28 +209,101 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fca111a8-fa0d-4bc4-91d7-3f67000235a6"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1e10ab89-2b2d-4a68-9e4d-5cace034d29c"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""840132c9-4394-463d-93df-34d48230a32d"",
+                    ""path"": ""<Keyboard>/f5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SaveGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""953ae156-85da-41a0-82db-ca3245609864"",
+                    ""path"": ""<Keyboard>/f6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LoadGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""PauseActionMap"",
+            ""id"": ""3e086b8c-0fda-408b-9013-cadaaede3eb5"",
+            ""actions"": [
+                {
+                    ""name"": ""UnpauseGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""b3c6378d-b155-415a-9b19-dee4e7289cd5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""a3e7200b-496a-499b-bcab-2abf6b90c8af"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""a9984c02-fdad-4154-9018-0efefe47c993"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UnpauseGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""460b81ca-ef86-495d-8174-fffb940df694"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
     ],
-    ""controlSchemes"": [
-        {
-            ""name"": ""Keyboard / Mouse"",
-            ""bindingGroup"": ""Keyboard / Mouse"",
-            ""devices"": [
-                {
-                    ""devicePath"": ""<Keyboard>"",
-                    ""isOptional"": false,
-                    ""isOR"": false
-                },
-                {
-                    ""devicePath"": ""<VirtualMouse>"",
-                    ""isOptional"": true,
-                    ""isOR"": false
-                }
-            ]
-        }
-    ]
+    ""controlSchemes"": []
 }");
         // PlayerActionMap
         m_PlayerActionMap = asset.FindActionMap("PlayerActionMap", throwIfNotFound: true);
@@ -208,6 +313,14 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_PlayerActionMap_Look = m_PlayerActionMap.FindAction("Look", throwIfNotFound: true);
         m_PlayerActionMap_Fire = m_PlayerActionMap.FindAction("Fire", throwIfNotFound: true);
         m_PlayerActionMap_Reload = m_PlayerActionMap.FindAction("Reload", throwIfNotFound: true);
+        m_PlayerActionMap_PauseGame = m_PlayerActionMap.FindAction("PauseGame", throwIfNotFound: true);
+        m_PlayerActionMap_Inventory = m_PlayerActionMap.FindAction("Inventory", throwIfNotFound: true);
+        m_PlayerActionMap_SaveGame = m_PlayerActionMap.FindAction("SaveGame", throwIfNotFound: true);
+        m_PlayerActionMap_LoadGame = m_PlayerActionMap.FindAction("LoadGame", throwIfNotFound: true);
+        // PauseActionMap
+        m_PauseActionMap = asset.FindActionMap("PauseActionMap", throwIfNotFound: true);
+        m_PauseActionMap_UnpauseGame = m_PauseActionMap.FindAction("UnpauseGame", throwIfNotFound: true);
+        m_PauseActionMap_Inventory = m_PauseActionMap.FindAction("Inventory", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -263,6 +376,10 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerActionMap_Look;
     private readonly InputAction m_PlayerActionMap_Fire;
     private readonly InputAction m_PlayerActionMap_Reload;
+    private readonly InputAction m_PlayerActionMap_PauseGame;
+    private readonly InputAction m_PlayerActionMap_Inventory;
+    private readonly InputAction m_PlayerActionMap_SaveGame;
+    private readonly InputAction m_PlayerActionMap_LoadGame;
     public struct PlayerActionMapActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -273,6 +390,10 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         public InputAction @Look => m_Wrapper.m_PlayerActionMap_Look;
         public InputAction @Fire => m_Wrapper.m_PlayerActionMap_Fire;
         public InputAction @Reload => m_Wrapper.m_PlayerActionMap_Reload;
+        public InputAction @PauseGame => m_Wrapper.m_PlayerActionMap_PauseGame;
+        public InputAction @Inventory => m_Wrapper.m_PlayerActionMap_Inventory;
+        public InputAction @SaveGame => m_Wrapper.m_PlayerActionMap_SaveGame;
+        public InputAction @LoadGame => m_Wrapper.m_PlayerActionMap_LoadGame;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActionMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -300,6 +421,18 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @Reload.started -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnReload;
                 @Reload.performed -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnReload;
                 @Reload.canceled -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnReload;
+                @PauseGame.started -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnPauseGame;
+                @PauseGame.performed -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnPauseGame;
+                @PauseGame.canceled -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnPauseGame;
+                @Inventory.started -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnInventory;
+                @Inventory.performed -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnInventory;
+                @Inventory.canceled -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnInventory;
+                @SaveGame.started -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnSaveGame;
+                @SaveGame.performed -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnSaveGame;
+                @SaveGame.canceled -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnSaveGame;
+                @LoadGame.started -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnLoadGame;
+                @LoadGame.performed -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnLoadGame;
+                @LoadGame.canceled -= m_Wrapper.m_PlayerActionMapActionsCallbackInterface.OnLoadGame;
             }
             m_Wrapper.m_PlayerActionMapActionsCallbackInterface = instance;
             if (instance != null)
@@ -322,19 +455,63 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @Reload.started += instance.OnReload;
                 @Reload.performed += instance.OnReload;
                 @Reload.canceled += instance.OnReload;
+                @PauseGame.started += instance.OnPauseGame;
+                @PauseGame.performed += instance.OnPauseGame;
+                @PauseGame.canceled += instance.OnPauseGame;
+                @Inventory.started += instance.OnInventory;
+                @Inventory.performed += instance.OnInventory;
+                @Inventory.canceled += instance.OnInventory;
+                @SaveGame.started += instance.OnSaveGame;
+                @SaveGame.performed += instance.OnSaveGame;
+                @SaveGame.canceled += instance.OnSaveGame;
+                @LoadGame.started += instance.OnLoadGame;
+                @LoadGame.performed += instance.OnLoadGame;
+                @LoadGame.canceled += instance.OnLoadGame;
             }
         }
     }
     public PlayerActionMapActions @PlayerActionMap => new PlayerActionMapActions(this);
-    private int m_KeyboardMouseSchemeIndex = -1;
-    public InputControlScheme KeyboardMouseScheme
+
+    // PauseActionMap
+    private readonly InputActionMap m_PauseActionMap;
+    private IPauseActionMapActions m_PauseActionMapActionsCallbackInterface;
+    private readonly InputAction m_PauseActionMap_UnpauseGame;
+    private readonly InputAction m_PauseActionMap_Inventory;
+    public struct PauseActionMapActions
     {
-        get
+        private @PlayerInputActions m_Wrapper;
+        public PauseActionMapActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @UnpauseGame => m_Wrapper.m_PauseActionMap_UnpauseGame;
+        public InputAction @Inventory => m_Wrapper.m_PauseActionMap_Inventory;
+        public InputActionMap Get() { return m_Wrapper.m_PauseActionMap; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PauseActionMapActions set) { return set.Get(); }
+        public void SetCallbacks(IPauseActionMapActions instance)
         {
-            if (m_KeyboardMouseSchemeIndex == -1) m_KeyboardMouseSchemeIndex = asset.FindControlSchemeIndex("Keyboard / Mouse");
-            return asset.controlSchemes[m_KeyboardMouseSchemeIndex];
+            if (m_Wrapper.m_PauseActionMapActionsCallbackInterface != null)
+            {
+                @UnpauseGame.started -= m_Wrapper.m_PauseActionMapActionsCallbackInterface.OnUnpauseGame;
+                @UnpauseGame.performed -= m_Wrapper.m_PauseActionMapActionsCallbackInterface.OnUnpauseGame;
+                @UnpauseGame.canceled -= m_Wrapper.m_PauseActionMapActionsCallbackInterface.OnUnpauseGame;
+                @Inventory.started -= m_Wrapper.m_PauseActionMapActionsCallbackInterface.OnInventory;
+                @Inventory.performed -= m_Wrapper.m_PauseActionMapActionsCallbackInterface.OnInventory;
+                @Inventory.canceled -= m_Wrapper.m_PauseActionMapActionsCallbackInterface.OnInventory;
+            }
+            m_Wrapper.m_PauseActionMapActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @UnpauseGame.started += instance.OnUnpauseGame;
+                @UnpauseGame.performed += instance.OnUnpauseGame;
+                @UnpauseGame.canceled += instance.OnUnpauseGame;
+                @Inventory.started += instance.OnInventory;
+                @Inventory.performed += instance.OnInventory;
+                @Inventory.canceled += instance.OnInventory;
+            }
         }
     }
+    public PauseActionMapActions @PauseActionMap => new PauseActionMapActions(this);
     public interface IPlayerActionMapActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -343,5 +520,14 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
+        void OnPauseGame(InputAction.CallbackContext context);
+        void OnInventory(InputAction.CallbackContext context);
+        void OnSaveGame(InputAction.CallbackContext context);
+        void OnLoadGame(InputAction.CallbackContext context);
+    }
+    public interface IPauseActionMapActions
+    {
+        void OnUnpauseGame(InputAction.CallbackContext context);
+        void OnInventory(InputAction.CallbackContext context);
     }
 }

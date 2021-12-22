@@ -1,14 +1,14 @@
 fileFormatVersion: 2
-guid: b0ce19e176d8b704cb4272cf4fd048d9
+guid: 43e343868147fa547a395644c63071f0
 ModelImporter:
-  serializedVersion: 20200
+  serializedVersion: 20101
   internalIDToNameTable:
   - first:
       74: -203655887218126122
     second: Run Left
   externalObjects: {}
   materials:
-    materialImportMode: 2
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -852,7 +852,6 @@ ModelImporter:
   animationType: 3
   humanoidOversampling: 1
   avatarSetup: 2
-  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

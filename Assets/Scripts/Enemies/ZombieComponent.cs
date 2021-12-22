@@ -1,56 +1,59 @@
-using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using Microsoft.Win32.SafeHandles;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(StateMachine))]
+[RequireComponent(typeof(ZombieStateMachine), typeof(ZombieHealth))]
+
 public class ZombieComponent : MonoBehaviour
 {
-    public float ZombieDamage => Damage;
-    
-    [SerializeField] private float Damage;
-    public NavMeshAgent ZombieNavMesh { get; private set; }
-    public Animator ZombieAnimator { get; private set; }
-    public StateMachine StateMachine { get; private set; }
+    public NavMeshAgent zombieNavMesh { get; private set; }
 
-    public GameObject FollowTarget;
+    public Animator zombieAnimator { get; private set; }
 
-    [SerializeField] private bool _Debug;
+    public ZombieStateMachine stateMachine { get; private set; }
+
+    public GameObject followTarget;
+
+    public float ZombieDamage => damage;
+    [SerializeField]
+    private float damage;
+
+    [SerializeField]
+    private bool _Debug;
 
     private void Awake()
     {
-        ZombieNavMesh = GetComponent<NavMeshAgent>();
-        ZombieAnimator = GetComponent<Animator>();
-        StateMachine = GetComponent<StateMachine>();
+        zombieNavMesh = GetComponent<NavMeshAgent>();
+        zombieAnimator = GetComponent<Animator>();
+        stateMachine = GetComponent<ZombieStateMachine>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        if (_Debug)
+        if(_Debug)
         {
-            Initialize(FollowTarget);
+            Initialize(followTarget);
         }
     }
 
-    public void Initialize(GameObject followTarget)
+    public void Initialize(GameObject _followTarget)
     {
-        FollowTarget = followTarget;
+        followTarget = _followTarget;
 
-        ZombieIdleState idleState = new ZombieIdleState(this, StateMachine);
-        StateMachine.AddState(ZombieStateType.Idle, idleState);
+        ZombieIdleState idleState = new ZombieIdleState(this, stateMachine);
+        stateMachine.AddState(ZombieStateType.Idle, idleState);
 
-        ZombieFollowState followState = new ZombieFollowState(FollowTarget, this, StateMachine);
-        StateMachine.AddState(ZombieStateType.Follow, followState);
+        ZombieFollowState followState = new ZombieFollowState(followTarget, this, stateMachine);
+        stateMachine.AddState(ZombieStateType.Follow, followState);
 
-        ZombieAttackState attackState = new ZombieAttackState(FollowTarget, this, StateMachine);
-        StateMachine.AddState(ZombieStateType.Attack, attackState);
+        ZombieAttackState attackState = new ZombieAttackState(followTarget, this, stateMachine);
+        stateMachine.AddState(ZombieStateType.Attack, attackState);
 
-        ZombieDeadState deadState = new ZombieDeadState(this, StateMachine);
-        StateMachine.AddState(ZombieStateType.Dead, deadState);
+        ZombieDeadState deadState = new ZombieDeadState(this, stateMachine);
+        stateMachine.AddState(ZombieStateType.Dead, deadState);
         
-        StateMachine.Initialize(ZombieStateType.Follow);
+        stateMachine.Initialize(ZombieStateType.Follow);
     }
 }

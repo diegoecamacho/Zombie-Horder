@@ -1,118 +1,123 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Character;
-using Character.UI;
 using UnityEngine;
 
-namespace Weapons
+public enum WeaponType
 {
-    public enum WeaponType
+    None,
+    Pistol,
+    MachineGun
+}
+
+[Serializable]
+public struct WeaponStats
+{
+    public WeaponType weaponType;
+    public string weaponName;
+    public float damage;
+    public int bulletsInClip;
+    public int clipSize;
+    public int bulletsAvailable;
+    public float fireStartDelay;
+    public float fireRate;
+    public float fireDistance;
+    public bool repeating;
+    public LayerMask weaponHitLayer;
+}
+
+public class WeaponComponent : MonoBehaviour
+{
+    public Transform GripLocation => gripIKLocation;
+    [SerializeField]
+    private Transform gripIKLocation;
+    public Transform particleSpawnLocation;
+
+    public WeaponStats weaponStats;
+
+    [SerializeField]
+    protected GameObject firingAnimation;
+
+    // Initialize
+    protected WeaponHolder weaponHolder;
+    protected CrosshairScript crosshair;
+    protected Camera mainCamera;
+    protected ParticleSystem firingEffect;
+
+    public bool firing { get; private set; }
+    public bool reloading { get; private set; }
+
+    private void Awake()
     {
-        None,
-        Pistol,
-        MachineGun
+        mainCamera = Camera.main;
     }
 
-    [Serializable]
-    public struct WeaponStats
+    public void Initialize(WeaponHolder _weaponHolder, WeaponScriptable weaponScript)
     {
-        public WeaponType WeaponType;
-        public string WeaponName;
-        public float Damage;
-        public int BulletsInClip;
-        public int ClipSize;
-        public int BulletsAvailable;
-        public float FireStartDelay;
-        public float FireRate;
-        public float FireDistance;
-        public bool Repeating;
-        public LayerMask WeaponHitLayers;
+        weaponHolder = _weaponHolder;
+        crosshair = weaponHolder.playerCrosshair;
+
+        if(weaponScript)
+        {
+            weaponStats = weaponScript.weaponStats;
+        }
     }
 
-    public class WeaponComponent : MonoBehaviour
+    public virtual void StartFiringWeapon()
     {
-        public Transform GripLocation => GripIKLocation;
-        [SerializeField] private Transform GripIKLocation;
-        [SerializeField] protected Transform ParticleSpawnLocation;
-  
-        public WeaponStats WeaponInformation => WeaponStats;
-  
-        [SerializeField] protected GameObject FiringAnimation;
-        [SerializeField] protected WeaponStats WeaponStats;
-
-
-        protected Camera MainCamera;
-        protected WeaponHolder WeaponHolder;
-        protected CrossHairScript CrosshairComponent;
-        protected ParticleSystem FiringEffect;
-  
-        public bool Firing { get; private set; }
-        public bool Reloading { get; private set; }
-
-        private void Awake()
+        firing = true;
+        if(weaponStats.repeating)
         {
-            MainCamera = Camera.main;
+            InvokeRepeating(nameof(FireWeapon), weaponStats.fireStartDelay, weaponStats.fireRate);
         }
-
-        public void Initialize(WeaponHolder weaponHolder, CrossHairScript crossHair)
+        else
         {
-            WeaponHolder = weaponHolder;
-            CrosshairComponent = crossHair;
+            FireWeapon();
         }
+    }
 
-        public virtual void StartFiringWeapon()
+    public virtual void StopFiringWeapon()
+    {
+        if (firingEffect)
+            Destroy(firingEffect.gameObject);
+
+        firing = false;
+        CancelInvoke(nameof(FireWeapon));
+    }
+
+    protected virtual void FireWeapon()
+    {
+        weaponStats.bulletsInClip--;
+    }
+
+
+    public virtual void StartReloading()
+    {
+        reloading = true;
+        ReloadWeapon();
+    }
+
+    public virtual void StopReloading()
+    {
+        reloading = false;
+    }
+
+    protected virtual void ReloadWeapon()
+    {
+        if (firingEffect)
+            Destroy(firingEffect.gameObject);
+
+        int bulletsToReload = weaponStats.clipSize - weaponStats.bulletsAvailable;
+
+        if(bulletsToReload < 0)
         {
-            Firing = true;
-            if (WeaponStats.Repeating)
-            {
-                InvokeRepeating(nameof(FireWeapon), WeaponStats.FireStartDelay, WeaponStats.FireRate);
-            }
-            else
-            {
-                FireWeapon();
-            }
-        } 
-  
-        public virtual void StopFiringWeapon()
-        {
-            Firing = false;
-            if (FiringEffect) Destroy(FiringEffect.gameObject);
-            CancelInvoke(nameof(FireWeapon));
+            weaponStats.bulletsInClip = weaponStats.clipSize;
+            weaponStats.bulletsAvailable -= weaponStats.clipSize;
         }
-
-        protected virtual void FireWeapon()
+        else
         {
-            Debug.Log("Firing Weapon");
-            WeaponStats.BulletsInClip--;
-        }
-
-        public virtual void StartReloading()
-        {
-            Reloading = true;
-            ReloadWeapon();
-        }
-
-        public virtual void StopReloading()
-        {
-            Reloading = false;
-        }
-
-        protected virtual void ReloadWeapon()
-        {
-            if (FiringEffect) Destroy(FiringEffect.gameObject);
-            
-            int bulletsToReload = WeaponStats.ClipSize - WeaponStats.BulletsAvailable;
-            if (bulletsToReload < 0)
-            {
-                WeaponStats.BulletsInClip = WeaponStats.ClipSize;
-                WeaponStats.BulletsAvailable -= WeaponStats.ClipSize;
-            }
-            else
-            {
-                WeaponStats.BulletsInClip = WeaponStats.BulletsAvailable;
-                WeaponStats.BulletsAvailable = 0;
-            }
+            weaponStats.bulletsInClip = weaponStats.bulletsAvailable;
+            weaponStats.bulletsAvailable = 0;
         }
     }
 }

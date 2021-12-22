@@ -1,58 +1,61 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateMachine : MonoBehaviour
+public class StateMachine<T> : MonoBehaviour where T : Enum
 {
-    public State CurrentState { get; private set; }
-    protected Dictionary<ZombieStateType, State> States;
+    public T ActiveEnumState { get; private set; }
+    public State<T> currentState { get; private set; }
+    protected Dictionary<T, State<T>> States;
     private bool Running;
 
     private void Awake()
     {
-        States = new Dictionary<ZombieStateType, State>();
+        States = new Dictionary<T, State<T>>();
     }
 
-    public void Initialize(ZombieStateType startingState)
+    public void Initialize(T startingState)
     {
         if (States.ContainsKey(startingState))
         {
-            ChanceState(startingState);
-        }
-        else if(States.ContainsKey(ZombieStateType.Idle))
-        {
-            ChanceState(ZombieStateType.Idle);
+            ChangeState(startingState);
         }
     }
 
-    public void AddState(ZombieStateType stateName, State state)
+    public void AddState(T stateName, State<T> state)
     {
-        if (States.ContainsKey(stateName)) return;
+        if (States.ContainsKey(stateName))
+            return;
+
         States.Add(stateName, state);
     }
 
-    public void RemoveState(ZombieStateType stateName)
+    public void RemoveState(T stateName)
     {
-        if (!States.ContainsKey(stateName)) return;
+        if (!States.ContainsKey(stateName))
+            return;
+
         States.Remove(stateName);
     }
 
-    public void ChanceState(ZombieStateType nextState)
+    public void ChangeState(T nextState)
     {
-        if (Running)
+        if(Running)
         {
             StopRunningState();
         }
 
-        if (!States.ContainsKey(nextState)) return;
+        if (!States.ContainsKey(nextState))
+            return;
+        
+        ActiveEnumState = nextState;
+        currentState = States[nextState];
+        currentState.Start();
 
-        CurrentState = States[nextState];
-        CurrentState.Start();
-
-        if (CurrentState.UpdateInterval > 0)
+        if(currentState.updateInterval > 0)
         {
-            InvokeRepeating(nameof(IntervalUpdate),0.0f, CurrentState.UpdateInterval);
+            InvokeRepeating(nameof(IntervalUpdate), 0.0f, currentState.updateInterval);
         }
 
         Running = true;
@@ -61,15 +64,15 @@ public class StateMachine : MonoBehaviour
     private void StopRunningState()
     {
         Running = false;
-        CurrentState.Exit();
+        currentState.Exit();
         CancelInvoke(nameof(IntervalUpdate));
     }
 
     private void IntervalUpdate()
     {
-        if (Running)
+        if(Running)
         {
-            CurrentState.IntervalUpdate();
+            currentState.IntervalUpdate();
         }
     }
 
@@ -77,7 +80,7 @@ public class StateMachine : MonoBehaviour
     {
         if (Running)
         {
-            CurrentState.Update();
+            currentState.Update();
         }
     }
 
@@ -85,7 +88,7 @@ public class StateMachine : MonoBehaviour
     {
         if (Running)
         {
-            CurrentState.FixedUpdate();
+            currentState.FixedUpdate();
         }
     }
 }

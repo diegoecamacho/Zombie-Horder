@@ -1,58 +1,57 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using Systems.Health_System;
 using UnityEngine;
 
 public class ZombieAttackState : ZombieStates
 {
-    private GameObject FollowTarget;
-    private IDamagable DamagableObject;
-    
-    private float AttackRange = 1.5f;
-    
     private static readonly int MovementZHash = Animator.StringToHash("MovementZ");
-    private static readonly int IsAttackingHash = Animator.StringToHash("isAttacking");
+    private static readonly int IsAttackingHash = Animator.StringToHash("IsAttacking");
 
-    public ZombieAttackState(GameObject followTarget, ZombieComponent zombie, StateMachine stateMachine) : base(zombie, stateMachine)
+    private GameObject followTarget;
+    private float attackRange = 2.0f;
+
+    private IDamageable damageableObject;
+
+    public ZombieAttackState(GameObject _followTarget, ZombieComponent zombie, ZombieStateMachine stateMachine) : base(zombie, stateMachine)
     {
-        FollowTarget = followTarget;
-        UpdateInterval = 2.0f;
+        followTarget = _followTarget;
+        updateInterval = 2.0f;
+
+        damageableObject = followTarget.GetComponent<IDamageable>();
     }
-    
+
     // Start is called before the first frame update
     public override void Start()
     {
-        OwnerZombie.ZombieNavMesh.isStopped = true;
-        OwnerZombie.ZombieNavMesh.ResetPath();
-        OwnerZombie.ZombieAnimator.SetFloat(MovementZHash, 0.0f);
-        OwnerZombie.ZombieAnimator.SetBool(IsAttackingHash , true);
-
-        DamagableObject = FollowTarget.GetComponent<IDamagable>();
+        ownerZombie.zombieNavMesh.isStopped = true;
+        ownerZombie.zombieNavMesh.ResetPath();
+        ownerZombie.zombieAnimator.SetFloat(MovementZHash, 0.0f);
+        ownerZombie.zombieAnimator.SetBool(IsAttackingHash, true);
     }
 
     public override void IntervalUpdate()
     {
         base.IntervalUpdate();
-        DamagableObject?.TakeDamage(OwnerZombie.ZombieDamage);
+
+        damageableObject?.TakeDamage(ownerZombie.ZombieDamage);
     }
 
     // Update is called once per frame
     public override void Update()
     {
-        OwnerZombie.transform.LookAt(FollowTarget.transform.position, Vector3.up);
+        ownerZombie.transform.LookAt(followTarget.transform.position, Vector3.up);
 
-        float distanceBetween = Vector3.Distance(OwnerZombie.transform.position, FollowTarget.transform.position);
-        if (distanceBetween > AttackRange)
+        float distanceBetween = Vector3.Distance(ownerZombie.transform.position, followTarget.transform.position);
+
+        if (distanceBetween > attackRange)
         {
-            StateMachine.ChanceState(ZombieStateType.Follow);
+            stateMachine.ChangeState(ZombieStateType.Follow);
         }
-        
-        //TODO: Zombie Health < 0 Die.
     }
 
     public override void Exit()
     {
         base.Exit();
-        OwnerZombie.ZombieAnimator.SetBool(IsAttackingHash , false);
+        ownerZombie.zombieAnimator.SetBool(IsAttackingHash, false);
     }
 }

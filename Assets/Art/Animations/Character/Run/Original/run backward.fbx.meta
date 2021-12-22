@@ -1,14 +1,14 @@
 fileFormatVersion: 2
-guid: b6c5c1d4b83548b4289e8d173aa563a8
+guid: df2b0369895023f488ad1b3a40a1aedf
 ModelImporter:
-  serializedVersion: 20200
+  serializedVersion: 20101
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Run Backwards
+    second: Run Backward
   externalObjects: {}
   materials:
-    materialImportMode: 2
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -35,7 +35,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Run Backwards
+      name: Run Backward
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
@@ -852,7 +852,6 @@ ModelImporter:
   animationType: 3
   humanoidOversampling: 1
   avatarSetup: 2
-  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

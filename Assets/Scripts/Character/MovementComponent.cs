@@ -1,114 +1,129 @@
-using System;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
-namespace Character
+public class MovementComponent : MonoBehaviour
 {
-    public class MovementComponent : MonoBehaviour
+    [SerializeField]
+    private float walkSpeed;
+    [SerializeField]
+    private float runSpeed;
+    [SerializeField]
+    private float jumpForce;
+    
+    [SerializeField]
+    private LayerMask jumpLayerMask;
+    [SerializeField]
+    private float jumpThreshold = 0.1f;
+
+    private Vector3 NextPositionCheck;
+    [SerializeField]
+    private float MoveDirectionBuffer = 10.0f;
+
+    // Components
+    private PlayerController playerController;
+    private Animator playerAnimator;
+    private Rigidbody playerRigidbody;
+
+    // References
+    private Vector2 inputVector = Vector2.zero;
+    private Vector3 moveDirection = Vector3.zero;
+
+    //Animator Hashes
+    public readonly int MovementXHash = Animator.StringToHash("MovementX");
+    public readonly int MovementYHash = Animator.StringToHash("MovementY");
+    public readonly int isJumpingHash = Animator.StringToHash("isJumping");
+    public readonly int isRunningHash = Animator.StringToHash("isRunning");
+
+    private void Awake()
     {
-        [SerializeField] private float WalkSpeed;
-        [SerializeField] private float RunSpeed;
-        [SerializeField] private float JumpForce;
-        [SerializeField] private float MoveDirectionBuffer = 2f;
+        playerController = GetComponent<PlayerController>();
+        playerAnimator = GetComponent<Animator>();
+        playerRigidbody = GetComponent<Rigidbody>();
+    }
 
-        //Components
-        private PlayerController PlayerController;
-        private Animator PlayerAnimator;
-        private Rigidbody PlayerRigidbody;
-        private NavMeshAgent PlayerNavMeshAgent;
+    public void OnMovement(InputValue value)
+    {
+        inputVector = value.Get<Vector2>();
+        playerAnimator.SetFloat(MovementXHash, inputVector.x);
+        playerAnimator.SetFloat(MovementYHash, inputVector.y);
+    }
 
-        //References
-        private Transform PlayerTransform;
+    public void OnRun(InputValue value)
+    {
+        playerController.isRunning = value.isPressed;
+        playerAnimator.SetBool(isRunningHash, value.isPressed);
+    }
 
-        private Vector3 NextPositionCheck;
+    public void OnJump(InputValue value)
+    {
+        if (playerController.isJumping)
+            return;
 
-        private Vector2 InputVector = Vector2.zero;
-        private Vector3 MoveDirection = Vector3.zero;
-        
-        //Animator Hashes
-        private readonly int MovementXHash = Animator.StringToHash("MovementX");
-        private readonly int MovementYHash = Animator.StringToHash("MovementY");
-        private readonly int IsJumpingHash = Animator.StringToHash("IsJumping");
-        private readonly int IsRunningHash = Animator.StringToHash("IsRunning");
+        playerController.isJumping = value.isPressed;
+        playerAnimator.SetBool(isJumpingHash, value.isPressed);
 
-        private void Awake()
+        playerRigidbody.AddForce((transform.up + moveDirection) * jumpForce, ForceMode.Impulse);
+    }
+
+    private void Update()
+    {
+        if (playerController.isJumping)
+            return;
+
+        moveDirection = transform.forward * inputVector.y + transform.right * inputVector.x;
+
+        float currentSpeed = playerController.isRunning ? runSpeed : walkSpeed;
+
+        Vector3 movementDirection = moveDirection * (currentSpeed * Time.deltaTime);
+
+
+        NextPositionCheck = transform.position + movementDirection * MoveDirectionBuffer;
+
+        if (NavMesh.SamplePosition(NextPositionCheck, out NavMeshHit hit, 1.0f, NavMesh.AllAreas))
         {
-            PlayerTransform = transform;
-            PlayerController = GetComponent<PlayerController>();
-            PlayerAnimator = GetComponent<Animator>();
-            PlayerRigidbody = GetComponent<Rigidbody>();
-            PlayerNavMeshAgent = GetComponent<NavMeshAgent>();
-        }
-
-
-        /// <summary>
-        /// Get's notified when the player moves, called by the PlayerInput Component.
-        /// </summary>
-        /// <param name="value"></param>
-        public void OnMovement(InputValue value)
-        {
-            InputVector = value.Get<Vector2>();
-            
-            PlayerAnimator.SetFloat(MovementXHash, InputVector.x);
-            PlayerAnimator.SetFloat(MovementYHash, InputVector.y);
-        }
-        
-        /// <summary>
-        /// Get's notified when the player starts and ends running, Called by the PlayerInput component
-        /// </summary>
-        /// <param name="value"></param>
-        public void OnRun(InputValue value)
-        {
-            Debug.Log(value.isPressed);
-            PlayerController.IsRunning = value.isPressed;
-            PlayerAnimator.SetBool(IsRunningHash, value.isPressed);
-        }
-        
-        /// <summary>
-        /// Get's notified when the player presses the jump key, Called by the PlayerInput component
-        /// </summary>
-        /// <param name="value"></param>
-        public void OnJump(InputValue value)
-        {
-            if (PlayerController.IsJumping) return;
-            
-            PlayerController.IsJumping = value.isPressed;
-            PlayerAnimator.SetBool(IsJumpingHash, value.isPressed);
-            PlayerRigidbody.AddForce((PlayerTransform.up + MoveDirection) * JumpForce, ForceMode.Impulse);
-        }
-
-        private void Update()
-        {
-            if (PlayerController.IsJumping) return;
-
-            MoveDirection = PlayerTransform.forward * InputVector.y + PlayerTransform.right * InputVector.x;
-
-            float currentSpeed = PlayerController.IsRunning ? RunSpeed : WalkSpeed;
-
-            Vector3 movementDirection = MoveDirection * (currentSpeed * Time.deltaTime);
-
-            NextPositionCheck = transform.position + MoveDirection * MoveDirectionBuffer;
-            if (NavMesh.SamplePosition(NextPositionCheck, out NavMeshHit hit, 1f, NavMesh.AllAreas))
-            {
-                transform.position += movementDirection;
-            }
-        }
-
-        private void OnCollisionEnter(Collision other)
-        {
-            if (!other.collider.CompareTag("Ground") || !PlayerController.IsJumping) return;
-            
-            PlayerController.IsJumping = false;
-            PlayerAnimator.SetBool(IsJumpingHash, false);
-        }
-
-        private void OnDrawGizmos()
-        {
-            if (NextPositionCheck != Vector3.zero)
-            {
-                Gizmos.DrawWireSphere(NextPositionCheck, 0.5f);
-            }
+            transform.position += movementDirection;
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground") && playerController.isJumping)
+        {
+            playerController.isJumping = false;
+            playerAnimator.SetBool(isJumpingHash, false);
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if(NextPositionCheck != Vector3.zero)
+        {
+            Gizmos.DrawWireSphere(NextPositionCheck, 0.5f);
+        }
+    }
+
+    #region SubscribeToActions
+    //PlayerInputActions playerActions;
+    //private void Awake()
+    //{
+    //    playerActions = new PlayerInputActions();
+    //}
+    //private void Movement(InputAction.CallbackContext value)
+    //{
+    //    Debug.Log(value.ReadValue<Vector2>());
+    //}
+    //private void OnEnable()
+    //{
+    //    playerActions.Enable();
+    //    playerActions.PlayerActionMap.Movement.performed += Movement;
+    //}
+    //private void OnDisable()
+    //{
+    //    playerActions.Disable();
+    //    playerActions.PlayerActionMap.Movement.performed -= Movement;
+    //}
+    #endregion
 }
